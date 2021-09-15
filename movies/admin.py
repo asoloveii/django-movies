@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from modeltranslation.admin import TranslationAdmin
 
 from .models import *
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'name', 'url')
     list_display_links = ('name',)
 
@@ -28,7 +29,7 @@ class MovieShotsInline(admin.TabularInline):
 
 
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
     list_display = ('id', 'title', 'category', 'url', 'draft')
     list_filter = ('category', 'year')
     list_editable = ('draft',)
@@ -93,12 +94,12 @@ class ReviewsAdmin(admin.ModelAdmin):
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
     list_display = ('name', 'url')
 
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
     list_display = ('name', 'age', 'get_image')
     readonly_fields = ('get_image', )
 
@@ -109,7 +110,7 @@ class ActorAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(TranslationAdmin):
     list_display = ('title', 'movie', 'get_image')
     readonly_fields = ('get_image',)
 
